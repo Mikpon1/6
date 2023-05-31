@@ -7,6 +7,7 @@ class WrongDate extends Exception { }
 class Main {
     public static Scanner scan = new Scanner(System.in);
 
+  
     public static void main(String[] args) {
         while(true) {
             try {
