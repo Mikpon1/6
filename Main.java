@@ -26,6 +26,9 @@ class Main {
               catch(WrongAge e) {
                 System.out.println("Błędny wiek");
               }
+             catch(WrongDate e) {
+                System.out.println("Błędna data");
+              }
         
         
         }
@@ -59,13 +62,33 @@ class Main {
 
         return age;
   }
+  
+  public static String ReadDate() throws WrongDate {
+        scan.nextLine();
+        System.out.println("Podaj datę: ");
+        String date = scan.nextLine();
+        // dd - mm - rrrr
+        String dzien = date.substring(0, 2);
+        String miesiac = date.substring(3, 5);
+        String rok = date.substring(6, 10);
 
-    public static void exercise1() throws IOException, WrongStudentName, WrongAge {
+      int day = Integer.parseInt(dzien);
+      int mounth = Integer.parseInt(miesiac);
+      int year = Integer.parseInt(rok);
+      
+    
+        if(date.contains(" ") || date.charAt(2) != '-' || date.charAt(5) != '-' || day>31 || mounth > 12 || year > 5000)
+            throw new WrongDate();
+        
+
+        return date;
+  }
+  
+
+    public static void exercise1() throws IOException, WrongStudentName, WrongAge, WrongDate {
         var name = ReadName();
         var age = ReadAge();
-        scan.nextLine();
-        System.out.println("Podaj datę urodzenia DD-MM-YYY");
-        var date = scan.nextLine();
+        var date = ReadDate();
         (new Service()).addStudent(new Student(name, age, date));
     }
 
